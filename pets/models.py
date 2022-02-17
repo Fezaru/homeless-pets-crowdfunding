@@ -2,7 +2,7 @@ from django.db import models
 
 
 def upload_gallery_image(instance, filename):
-    return f"images/{instance.pet.external_id}/gallery/{filename}"
+    return f"pets/images/{instance.pet.external_id}/gallery/{filename}"
 
 
 class BaseModel(models.Model):
@@ -42,5 +42,3 @@ class Pet(BaseModel):
 class Image(BaseModel):
     image = models.ImageField(upload_to=upload_gallery_image)
     pet = models.ForeignKey(Pet, on_delete=models.CASCADE, related_name='images')
-
-
