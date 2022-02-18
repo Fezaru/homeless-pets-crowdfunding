@@ -2,7 +2,7 @@ from django.db import models
 
 
 def upload_gallery_image(instance, filename):
-    return f"pets/images/{instance.pet.external_id}/gallery/{filename}"
+    return f"images/{instance.pet.external_id}/gallery/{filename}.jpg"
 
 
 class BaseModel(models.Model):
@@ -21,6 +21,7 @@ class Pet(BaseModel):
     original_url = models.URLField()
     pet_type = models.TextField(null=True, blank=True)
     external_id = models.TextField()
+    is_created = models.BooleanField(null=True, blank=True)
     # general
     name = models.TextField()
     sex = models.TextField(choices=SEX_CHOICES)
