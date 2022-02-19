@@ -5,5 +5,6 @@ urlpatterns = [
     path('', views.PetsCatalogListView.as_view(), name='pets-home'),
     path('pets/', views.PetsCatalogListView.as_view(), name='pets-home'),
     path('pets/<int:pk>/', views.PetsCatalogDetailView.as_view(), name='pets-detail'),
+    path('pets/new/', views.PetsCatalogCreateView.as_view(), name='pets-create'),
 
 ]
