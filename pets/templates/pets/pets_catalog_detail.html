@@ -1,0 +1,101 @@
+{% extends "pets/base.html" %}
+{% block content %}
+    <article class="media content-section">
+
+        <div class="content-wrapper">
+            <div>
+                <div class="gallery-slider">
+                    {% for gallery_image in pet.images.all %}
+                        <div>
+                            <img src="{{ gallery_image.image.url }}" alt="" title=""/>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <h2 class="article-title mt-3" style="border-bottom: 1px solid #e3e3e3">{{ object.name }}</h2>
+            <p class="article-content px-3">{{ object.description }}</p>
+
+            <div>
+                <table class="characteristic-table">
+                    <tr>
+                        <th>Пол:</th>
+                        <th>{{ pet.sex }}</th>
+                    </tr>
+                    <tr>
+                        <th>Возраст:</th>
+                        <th>{{ pet.age }}</th>
+                    </tr>
+                    {% if pet.vet_peculiarities %}
+                        <tr>
+                            <th>Вет.особенности:</th>
+                            <th>{{ pet.vet_peculiarities }}</th>
+
+                        </tr>
+                    {% endif %}
+                    {% if pet.flea_treatment %}
+
+                        <tr>
+                            <th>Обработка от блох/клещей:</th>
+                            <th>{{ pet.flea_treatment }}</th>
+                        </tr>
+                    {% endif %}
+                    {% if pet.fur_type %}
+                        <tr>
+                            <th>Тип шерсти:</th>
+                            <th>{{ pet.fur_type }}</th>
+                        </tr>
+                    {% endif %}
+
+                    {% if pet.height %}
+                        <tr>
+                            <th>Высота в холке:</th>
+                            <th>{{ pet.height }}</th>
+                        </tr>
+                    {% endif %}
+
+                    {% if pet.breed %}
+                        <tr>
+                            <th>Порода:</th>
+                            <th>{{ pet.breed }}</th>
+                        </tr>
+                    {% endif %}
+
+                    <tr>
+                        <th>Характер:</th>
+                        <th>{{ pet.character }}</th>
+                    </tr>
+                    {% if pet.feeding %}
+
+                        <tr>
+                            <th>Кормление:</th>
+                            <th>{{ pet.feeding }}</th>
+                        </tr>
+                    {% endif %}
+
+                    {% if pet.litter_box_trained %}
+
+                        <tr>
+                            <th>Приучена к лотку:</th>
+                            <th>{{ pet.litter_box_trained }}</th>
+                        </tr>
+                    {% endif %}
+
+                    <tr>
+                        <th>В каталоге:</th>
+                        <th>{{ pet.in_catalog_since }}</th>
+                    </tr>
+                    <tr>
+                        <th>Приют:</th>
+                        <th>{{ pet.shelter }}</th>
+                    </tr>
+                    <tr>
+                        <th>Информация о кураторе:</th>
+                        <th>{{ pet.curator_info }}</th>
+                    </tr>
+                </table>
+            </div>
+
+        </div>
+    </article>
+{% endblock content %}

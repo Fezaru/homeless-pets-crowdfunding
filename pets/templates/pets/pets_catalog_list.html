@@ -1,54 +1,64 @@
 {% extends "pets/base.html" %}
 {% block content %}
-    {% for pet in pets %}
-        <div class="container">
-          <div class="row">
-            <div class="col-md-4">
-              <div class="card mb-4 box-shadow">
-                <img class="card-img-top" alt="{{ pet.name }}" style="height: 225px; width: 100%; display: block;" src="{{ pet.images.all.0.image.url }}">
-                <div class="card-body">
-                  <h4 class="font-weight-bold">{{ pet.name }}</h4>
-                  <small class="card-text text-muted">{{ pet.sex }}, {{ pet.age }}, {{ pet.vet_peculiarities }}</small>
-                  <small class="card-text text-muted">{{ pet.character }}</small>
-                  <div class="d-flex justify-content-between align-items-center">
-                    <div class="btn-group">
-                      <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                      <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+    <div class="container">
+        <div class="row">
+            {% for pet in pets %}
+                <div class="col-md-4">
+                    <div class="card mb-4 box-shadow">
+                        <div class="overflow-hidden">
+                            <a href="{% url 'pets-detail' pet.id %}">
+                                <img class="card-img-top pet-img" alt="{{ pet.name }}"
+                                     style="height: 225px; width: 100%; display: block;"
+                                     src="{{ pet.images.all.0.image.url }}">
+                            </a>
+                        </div>
+                        <div class="card-body">
+                            <a href="{% url 'pets-detail' pet.id %}"><h4 class="font-weight-bold">{{ pet.name }}</h4></a>
+                            <div>
+                                <small class="card-text text-muted">{{ pet.sex }}, {{ pet.age }}, {{ pet.vet_peculiarities }}</small>
+                            </div>
+                            <div class="mb-2 text-truncate">
+                                <small class="card-text text-muted">{{ pet.character }}</small>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                                    <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                                </div>
+                                <small class="text-muted">9 mins</small>
+                            </div>
+                        </div>
                     </div>
-                    <small class="text-muted">9 mins</small>
-                  </div>
                 </div>
-              </div>
-            </div>
-          </div>
+            {% endfor %}
         </div>
-    {% endfor %}
+    </div>
     {% if is_paginated %}
 
-      {% if page_obj.has_previous %}
-        <a class="btn btn-outline-info mb-4" href="?page=1">First</a>
-        <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.previous_page_number }}">Previous</a>
-      {% endif %}
+        {% if page_obj.has_previous %}
+            <a class="btn btn-outline-info mb-4" href="?page=1">First</a>
+            <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+        {% endif %}
 
         {% for num in page_obj.paginator.page_range %}
 
 
-          {% if page_obj.number == num %}
+            {% if page_obj.number == num %}
 
-            <a class="btn btn-info mb-4" href="?page={{ num }}">{{ num }}</a>
+                <a class="btn btn-info mb-4" href="?page={{ num }}">{{ num }}</a>
 
             {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
 
-              <a class="btn btn-outline-info mb-4" href="?page={{ num }}">{{ num }}</a>
+                <a class="btn btn-outline-info mb-4" href="?page={{ num }}">{{ num }}</a>
 
-          {% endif %}
+            {% endif %}
 
         {% endfor %}
 
-      {% if page_obj.has_next %}
-        <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.next_page_number }}">Next</a>
-        <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.paginator.num_pages }}">Last</a>
-      {% endif %}
+        {% if page_obj.has_next %}
+            <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.next_page_number }}">Next</a>
+            <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.paginator.num_pages }}">Last</a>
+        {% endif %}
 
     {% endif %}
 {% endblock content %}

@@ -1,4 +1,5 @@
 from django.db import models
+from django.conf import settings
 
 
 def upload_gallery_image(instance, filename):
@@ -21,9 +22,10 @@ class Pet(BaseModel):
     original_url = models.URLField()
     pet_type = models.TextField(null=True, blank=True)
     external_id = models.TextField()
-    is_created = models.BooleanField(null=True, blank=True)
+    created_by_user = models.ForeignKey(settings.AUTH_USER_MODEL, null=True, blank=True, on_delete=models.CASCADE)
     # general
     name = models.TextField()
+    description = models.TextField()
     sex = models.TextField(choices=SEX_CHOICES)
     age = models.TextField()
     vet_peculiarities = models.TextField()

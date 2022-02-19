@@ -79,6 +79,7 @@ class EgidaClient:
         pet_type = CATALOG_URL_TO_PET_TYPE.get(soup.find('a', {'class': 'ecategory'})['href'], None)
         result = {'pet_type': pet_type}
         result.update({'name': soup.find('h3', {'class': 'single-entry__title'}).text})
+        result.update({'description': soup.find('div', {'class': 'single-entry__body__description'}).text})
         characteristics_lines = characteristics_div.find_all('dl')
         for characteristic in characteristics_lines:
             k, v = characteristic.text.replace('\n', '').split(':')
