@@ -1,0 +1,16 @@
+{% extends "pets/base.html" %}
+{% block content %}
+    <div class="content-section">
+        <form method="POST">
+            {% csrf_token %}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">Удалить запись</legend>
+                <h2>Вы уверены, что хотите удалить животное с именем "{{ object.name }}" из каталога?</h2>
+            </fieldset>
+            <div class="form-group">
+                <button class="btn btn-outline-danger" type="submit">Да, удалить</button>
+                <a class="btn btn-outline-secondary" href="{% url 'pets-detail' object.id %}">Отмена</a>
+            </div>
+        </form>
+    </div>
+{% endblock content %}

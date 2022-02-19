@@ -4,6 +4,8 @@ from django.views.generic import (
     ListView,
     DetailView,
     CreateView,
+    UpdateView,
+    DeleteView,
 )
 
 from pets.models import Pet, Image
@@ -35,3 +37,37 @@ class PetsCatalogCreateView(CreateView):
         for image in self.request.FILES.getlist('uploaded_images'):
             Image.objects.create(pet=self.object, image=image)
         return super().form_valid(form)
+
+
+class PetsCatalogUpdateView(UpdateView):
+    template_name = 'pets/pets_catalog_form.html'
+    model = Pet
+    fields = ['pet_type', 'name', 'description', 'sex', 'age', 'vet_peculiarities', 'flea_treatment', 'character',
+              'feeding', 'shelter', 'curator_info', 'fur_type', 'height', 'breed', 'litter_box_trained']
+
+    def form_valid(self, form):
+        form.instance.created_by_user = self.request.user
+        if self.request.FILES.getlist('uploaded_images'):
+            self.object = form.save()
+            self.object.images.all().delete()
+            for image in self.request.FILES.getlist('uploaded_images'):
+                Image.objects.create(pet=self.object, image=image)
+        return super().form_valid(form)
+
+    def test_func(self):
+        pet = self.get_object()
+        if self.request.user == pet.created_by_user:
+            return True
+        return False
+
+
+class PetsCatalogDeleteView(DeleteView):
+    template_name = 'pets/pets_catalog_confirm_delete.html'
+    model = Pet
+    success_url = '/pets'
+
+    def test_func(self):
+        pet = self.get_object()
+        if self.request.user == pet.created_by_user:
+            return True
+        return False
