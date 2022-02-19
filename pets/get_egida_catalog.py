@@ -15,6 +15,7 @@ CHARACTERISTIC_FIELD_NAME_TO_DB_FIELD_NAME = {
     'Характер': 'character',
     'Кормление': 'feeding',
     'Приучена к лотку': 'litter_box_trained',
+    'Приучен к лотку': 'litter_box_trained',
     'В каталоге': 'in_catalog_since',
     'Приют': 'shelter',
     'Телефон куратора': 'curator_info',
