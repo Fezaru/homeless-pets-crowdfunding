@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from datetime import date
 
 from django.views.generic import (
@@ -24,7 +25,7 @@ class PetsCatalogDetailView(DetailView):
     context_object_name = 'pet'
 
 
-class PetsCatalogCreateView(CreateView):
+class PetsCatalogCreateView(LoginRequiredMixin, CreateView):
     template_name = 'pets/pets_catalog_form.html'
     model = Pet
     fields = ['pet_type', 'name', 'description', 'sex', 'age', 'vet_peculiarities', 'flea_treatment', 'character',
@@ -39,7 +40,7 @@ class PetsCatalogCreateView(CreateView):
         return super().form_valid(form)
 
 
-class PetsCatalogUpdateView(UpdateView):
+class PetsCatalogUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     template_name = 'pets/pets_catalog_form.html'
     model = Pet
     fields = ['pet_type', 'name', 'description', 'sex', 'age', 'vet_peculiarities', 'flea_treatment', 'character',
@@ -61,7 +62,7 @@ class PetsCatalogUpdateView(UpdateView):
         return False
 
 
-class PetsCatalogDeleteView(DeleteView):
+class PetsCatalogDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     template_name = 'pets/pets_catalog_confirm_delete.html'
     model = Pet
     success_url = '/pets'
