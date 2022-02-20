@@ -1,3 +1,4 @@
+import logging
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from datetime import date
 
@@ -11,12 +12,35 @@ from django.views.generic import (
 
 from pets.models import Pet, Image
 
+logging.basicConfig(filename='pets_views.log', encoding='utf-8', level=logging.WARNING)
+logger = logging.getLogger(__name__)
+
 
 class PetsCatalogListView(ListView):
     model = Pet
     template_name = 'pets/pets_catalog_list.html'
     context_object_name = 'pets'
     paginate_by = 30
+
+    def get_queryset(self):
+        pet_type_values = self.request.GET.get('category_select')
+        if pet_type_values:
+            try:
+                pet_types = pet_type_values.split(',')
+                if len(pet_types) == 1 and pet_types[0] == 'all':
+                    return Pet.objects.all()
+                filtered_pets = Pet.objects.filter(pet_type__in=pet_types)
+                return filtered_pets if len(filtered_pets) > 0 else Pet.objects.all()
+            except Exception:
+                logger.error(f'Got invalid query filter parameters {pet_type_values}')
+                return Pet.objects.all()
+
+        return Pet.objects.all()
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        data = super().get_context_data()
+        data['selected'] = self.request.GET.get('category_select')
+        return data
 
 
 class PetsCatalogDetailView(DetailView):

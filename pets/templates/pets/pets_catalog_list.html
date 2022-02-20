@@ -1,6 +1,20 @@
 {% extends "pets/base.html" %}
 {% block content %}
     <div class="container" style="padding: 0">
+
+        <form id="category-form" method="GET">
+            <select name="category_select" class="custom-select custom-select-md mb-2" id="category-select">
+                <option {% if selected == "all" %} selected {% endif %} value="all">Все</option>
+                <option {% if selected == "cat" %} selected {% endif %} value="cat">Коты/Кошки</option>
+                <option {% if selected == "kitten" %} selected {% endif %} value="kitten">Котята</option>
+                <option {% if selected == "dog" %} selected {% endif %} value="dog">Собаки</option>
+                <option {% if selected == "puppy" %} selected {% endif %} value="puppy">Щенята</option>
+                <option {% if selected == "cat,kitten" %} selected {% endif %} value="cat,kitten">Коты/Кошки и котята</option>
+                <option {% if selected == "dog,puppy" %} selected {% endif %} value="dog,puppy">Собаки и щенята</option>
+                <option {% if selected == "kitten,puppy" %} selected {% endif %} value="kitten,puppy">Щенята и котята</option>
+            </select>
+        </form>
+
         <div class="row">
             {% for pet in pets %}
                 <div class="col-md-4">
@@ -28,7 +42,6 @@
                                             Пожертвовать
                                         </button>
                                     </a>
-                                    {#                                    <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>#}
                                 </div>
                             </div>
                         </div>
@@ -65,4 +78,15 @@
         {% endif %}
 
     {% endif %}
+
+    {% block scripts %}
+
+        <script type="text/javascript">
+            $('#category-select').click(function () {
+                $('#category-form').submit()
+            });
+        </script>
+
+    {% endblock scripts %}
+
 {% endblock content %}
