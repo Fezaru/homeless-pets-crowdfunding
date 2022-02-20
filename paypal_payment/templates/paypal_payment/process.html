@@ -1,7 +1,13 @@
 {% extends "pets/base.html" %}
 {% load crispy_forms_tags %}
 {% block content %}
-    <div>Для совершения пожертвований используется платежная система PayPal</div>
-    <div>Введите сумму, которую вы хотите пожертвовать и следуйте инструкциям.</div>
-    {{ form.render }}
+    <h1 class="donate-page-title">Пожертвование</h1>
+    <p class="donate-page-subtitle">Введите сумму, которую вы хотите пожертвовать и следуйте инструкциям.</p>
+    <div>
+    <button class="btn-success btn donate-btn mb-2">
+        {{ form.render }}
+        Пожертвовать
+    </button>
+    </div>
+    <small class="text-muted">Для совершения пожертвований используется платежная система PayPal</small>
 {% endblock content %}

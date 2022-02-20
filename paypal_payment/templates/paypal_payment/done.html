@@ -2,4 +2,9 @@
 {% load crispy_forms_tags %}
 {% block content %}
     <h1>Платёж завершился успешно, спасибо!</h1>
+    <div class="border-top pt-3">
+        <small class="text-muted">
+            <a href="{% url 'pets-home' %}">Вернуться в каталог</a>
+        </small>
+    </div>
 {% endblock content %}

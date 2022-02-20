@@ -2,5 +2,10 @@
 {% load crispy_forms_tags %}
 {% block content %}
     <h1>Платёж не был обработан</h1>
-    <p>При обработке вашего платежа возникла <проблема></проблема>.</p>
+    <p>При обработке вашего платежа возникла проблема.</p>
+    <div class="border-top pt-3">
+        <small class="text-muted">
+            <a href="{% url 'pets-home' %}">Вернуться в каталог</a>
+        </small>
+    </div>
 {% endblock content %}
