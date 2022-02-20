@@ -22,6 +22,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('users.urls')),
     path('', include('pets.urls')),
+    path('paypal/', include('paypal.standard.ipn.urls')),
+    path('payment/', include('paypal_payment.urls')),
 ]
 
 if settings.DEBUG:

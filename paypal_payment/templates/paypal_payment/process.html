@@ -1,0 +1,6 @@
+{% extends "pets/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <p>Для совершения пожертвований используется платежная система PayPal. Введите сумму, которую вы хотите пожертвовать и следуйте инструкциям.</p>
+    {{ form.render }}
+{% endblock content %}

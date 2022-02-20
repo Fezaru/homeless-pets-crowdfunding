@@ -42,6 +42,10 @@ INSTALLED_APPS = [
     # custom apps
     'users',
     'pets',
+    'paypal_payment',
+
+    # paypal
+    'paypal.standard.ipn',
 ]
 
 MIDDLEWARE = [
@@ -133,3 +137,14 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
 AUTH_USER_MODEL = 'auth.User'
+
+
+# PAYPAL SETTINGS
+PAYPAL_TEST = True
+PAYPAL_RECEIVER_EMAIL = 'nekhaichik.a@gmail.com'
+# PAYPAL_WPP_USER = os.getenv('PAYPAL_WPP_USER', None)
+# PAYPAL_WPP_PASSWORD = os.getenv('PAYPAL_WPP_PASSWORD', None)
+# PAYPAL_WPP_SIGNATURE = os.getenv('PAYPAL_WPP_SIGNATURE', None)
+
+# sandbox user login = sb-sayrm14007039@personal.example.com
+# sandbox user password = SANDBOX_758129%12
