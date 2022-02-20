@@ -13,12 +13,15 @@
                 </div>
             </div>
 
-            {% if pet.created_by_user == user %}
-                <div>
-                    <a href="{% url 'pets-update' pet.id %}" class="btn btn-secondary btn-sm mt-1 mb-1">Обновить</a>
-                    <a href="{% url 'pets-delete' object.id %}" class="btn btn-danger btn-sm mt-1 mb-1">Удалить</a>
-                </div>
-            {% endif %}
+            <div class="mt-2 mb-1">
+                <a type="button" class="btn btn-sm btn-outline-secondary" href="{% url 'payment-process' %}">Пожертвовать</a>
+
+                {% if pet.created_by_user == user %}
+                    <a href="{% url 'pets-update' pet.id %}" class="btn btn-secondary btn-sm">Обновить</a>
+                    <a href="{% url 'pets-delete' object.id %}" class="btn btn-danger btn-sm">Удалить</a>
+                {% endif %}
+            </div>
+
             <h2 class="article-title mt-3" style="border-bottom: 1px solid #e3e3e3">{{ object.name }}</h2>
             <p class="article-content px-3">{{ object.description }}</p>
 
