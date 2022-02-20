@@ -1,6 +1,6 @@
 {% extends "pets/base.html" %}
 {% block content %}
-    <div class="container">
+    <div class="container" style="padding: 0">
         <div class="row">
             {% for pet in pets %}
                 <div class="col-md-4">
@@ -13,7 +13,8 @@
                             </a>
                         </div>
                         <div class="card-body">
-                            <a href="{% url 'pets-detail' pet.id %}"><h4 class="font-weight-bold">{{ pet.name }}</h4></a>
+                            <a href="{% url 'pets-detail' pet.id %}"><h4 class="font-weight-bold">{{ pet.name }}</h4>
+                            </a>
                             <div>
                                 <small class="card-text text-muted">{{ pet.sex }}, {{ pet.age }}, {{ pet.vet_peculiarities }}</small>
                             </div>
@@ -22,8 +23,12 @@
                             </div>
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="btn-group">
-                                    <a type="button" class="btn btn-sm btn-outline-secondary" href="{% url 'payment-process' %}">Пожертвовать</a>
-{#                                    <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>#}
+                                    <a style="text-decoration: none" href="{% url 'payment-process' %}">
+                                        <button class="btn btn-sm btn-outline-success">
+                                            Пожертвовать
+                                        </button>
+                                    </a>
+                                    {#                                    <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>#}
                                 </div>
                             </div>
                         </div>
