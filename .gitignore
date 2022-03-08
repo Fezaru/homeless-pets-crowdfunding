@@ -1,5 +1,6 @@
 .idea
 media
+!media/default.jpg
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
