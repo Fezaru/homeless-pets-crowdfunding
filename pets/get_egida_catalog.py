@@ -3,7 +3,7 @@ import logging
 import requests
 from bs4 import BeautifulSoup
 
-logging.basicConfig(filename='get_egida_catalog.log', encoding='utf-8', level=logging.INFO)
+logging.basicConfig(filename='get_egida_catalog.log', level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 CHARACTERISTIC_FIELD_NAME_TO_DB_FIELD_NAME = {

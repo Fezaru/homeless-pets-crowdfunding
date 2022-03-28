@@ -12,7 +12,7 @@ from django.views.generic import (
 
 from pets.models import Pet, Image
 
-logging.basicConfig(filename='pets_views.log', encoding='utf-8', level=logging.WARNING)
+logging.basicConfig(filename='pets_views.log', level=logging.WARNING)
 logger = logging.getLogger(__name__)
 
 
